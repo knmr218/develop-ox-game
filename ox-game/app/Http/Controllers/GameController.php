@@ -93,7 +93,7 @@ class GameController extends Controller
 
     public function endGame() {
         Session::forget('board');
-        return view('title');
+        return redirect('/');
     }
 
 }
