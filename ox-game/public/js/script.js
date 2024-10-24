@@ -1,0 +1,92 @@
+function sendMoveToServer(row, col) {
+    // マス目の座標をサーバーに送信
+    fetch('/sendMove', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({ row: row, col: col }) // 行と列をサーバーに送信
+    })
+    .then(response => response.json()) // サーバーからのレスポンスをJSONで受け取る
+    .then(data => {
+        // サーバーから返ってきたデータを使ってクライアント側のボードを更新
+        clientBoard = data.board;
+        updateBoard(clientBoard);
+        
+        if (data.winner == 1) {
+            alert("あなたの勝ちです");
+        } else if (data.winner == 2) {
+            alert("あなたの負けです");
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+function updateBoard(board) {
+    // サーバーから送られたボード状態をもとにクライアントのボードを更新
+    for (let row = 0; row < board.length; row++) {
+        for (let col = 0; col < board[row].length; col++) {
+            const cell = tableCells[row * 3 + col]; // 対応する<td>要素を取得
+            let content;
+            switch(board[row][col]) {
+                case 0:
+                    content = '';
+                    break;
+                case 1:
+                    content = '○';
+                    break;
+                case 2:
+                    content = '×';
+                    break;
+            }
+            cell.textContent = content;
+        }
+    }
+}
+
+function resetGame() {
+    fetch('/resetGame', {
+        method: 'GET',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+    })
+    .then(response => response.json()) // サーバーからのレスポンスをJSONで受け取る
+    .then(data => {
+        if (data.status === 'reset') {
+            clientBoard = [
+                [0, 0, 0],
+                [0, 0, 0],
+                [0, 0, 0]
+            ];
+            updateBoard(clientBoard);
+            alert("リセットしました");
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+let clientBoard = [
+    [0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0]
+];
+
+const tableCells = document.querySelectorAll('.board td');
+tableCells.forEach(cell => {
+    cell.addEventListener('click', () => {
+        const row = cell.parentElement.rowIndex; // 行
+        const col = cell.cellIndex % 3; // 列
+
+        clientBoard[row][col] = 1;
+        updateBoard(clientBoard);
+
+        sendMoveToServer(row,col);
+    });
+});
+

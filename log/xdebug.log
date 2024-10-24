@@ -1,0 +1,108 @@
+[16] Log opened at 2024-10-24 00:29:18.597075
+[16] [Config] INFO: Control socket set up succesfully: '@xdebug-ctrl.16'
+[16] [Step Debug] INFO: Connecting to configured address/port: host.docker.internal:9012.
+[16] [Step Debug] WARN: Creating socket for 'host.docker.internal:9012', poll success, but error: Operation now in progress (29).
+[16] [Step Debug] ERR: Could not connect to debugging client. Tried: host.docker.internal:9012 (through xdebug.client_host/xdebug.client_port).
+[48] Log opened at 2024-10-24 00:29:26.245723
+[48] [Config] INFO: Control socket set up succesfully: '@xdebug-ctrl.48'
+[48] [Step Debug] INFO: Connecting to configured address/port: host.docker.internal:9012.
+[48] [Step Debug] WARN: Creating socket for 'host.docker.internal:9012', poll success, but error: Operation now in progress (29).
+[48] [Step Debug] ERR: Could not connect to debugging client. Tried: host.docker.internal:9012 (through xdebug.client_host/xdebug.client_port).
+[48] Log closed at 2024-10-24 00:29:26.285545
+
+[284] Log opened at 2024-10-24 00:39:19.840075
+[284] [Config] INFO: Control socket set up succesfully: '@xdebug-ctrl.284'
+[284] [Step Debug] INFO: Connecting to configured address/port: host.docker.internal:9012.
+[284] [Step Debug] WARN: Creating socket for 'host.docker.internal:9012', poll success, but error: Operation now in progress (29).
+[284] [Step Debug] ERR: Could not connect to debugging client. Tried: host.docker.internal:9012 (through xdebug.client_host/xdebug.client_port).
+[284] [Step Debug] INFO: Connecting to configured address/port: host.docker.internal:9012.
+[284] [Step Debug] WARN: Creating socket for 'host.docker.internal:9012', poll success, but error: Operation now in progress (29).
+[284] [Step Debug] ERR: Could not connect to debugging client. Tried: host.docker.internal:9012 (through xdebug.client_host/xdebug.client_port).
+[284] Log closed at 2024-10-24 00:39:43.665652
+
+[287] Log opened at 2024-10-24 00:40:02.556045
+[287] [Config] INFO: Control socket set up succesfully: '@xdebug-ctrl.287'
+[287] [Step Debug] INFO: Connecting to configured address/port: host.docker.internal:9012.
+[287] [Step Debug] WARN: Creating socket for 'host.docker.internal:9012', poll success, but error: Operation now in progress (29).
+[287] [Step Debug] ERR: Could not connect to debugging client. Tried: host.docker.internal:9012 (through xdebug.client_host/xdebug.client_port).
+[287] [Step Debug] INFO: Connecting to configured address/port: host.docker.internal:9012.
+[287] [Step Debug] WARN: Creating socket for 'host.docker.internal:9012', poll success, but error: Operation now in progress (29).
+[287] [Step Debug] ERR: Could not connect to debugging client. Tried: host.docker.internal:9012 (through xdebug.client_host/xdebug.client_port).
+[287] Log closed at 2024-10-24 00:40:24.468646
+
+[290] Log opened at 2024-10-24 00:40:39.697648
+[290] [Config] INFO: Control socket set up succesfully: '@xdebug-ctrl.290'
+[290] [Step Debug] INFO: Connecting to configured address/port: host.docker.internal:9012.
+[290] [Step Debug] WARN: Creating socket for 'host.docker.internal:9012', poll success, but error: Operation now in progress (29).
+[290] [Step Debug] ERR: Could not connect to debugging client. Tried: host.docker.internal:9012 (through xdebug.client_host/xdebug.client_port).
+[290] [Step Debug] INFO: Connecting to configured address/port: host.docker.internal:9012.
+[290] [Step Debug] WARN: Creating socket for 'host.docker.internal:9012', poll success, but error: Operation now in progress (29).
+[290] [Step Debug] ERR: Could not connect to debugging client. Tried: host.docker.internal:9012 (through xdebug.client_host/xdebug.client_port).
+[290] Log closed at 2024-10-24 00:41:00.408446
+
+[16] Log closed at 2024-10-24 00:41:01.903336
+
+[16] Log opened at 2024-10-24 02:54:19.323712
+[16] [Config] INFO: Control socket set up succesfully: '@xdebug-ctrl.16'
+[16] [Step Debug] INFO: Connecting to configured address/port: host.docker.internal:9012.
+[16] [Step Debug] WARN: Creating socket for 'host.docker.internal:9012', poll success, but error: Operation now in progress (29).
+[16] [Step Debug] WARN: Creating socket for 'host.docker.internal:9012', connect: Network is unreachable.
+[16] [Step Debug] ERR: Could not connect to debugging client. Tried: host.docker.internal:9012 (through xdebug.client_host/xdebug.client_port).
+[48] Log opened at 2024-10-24 02:54:22.921056
+[48] [Config] INFO: Control socket set up succesfully: '@xdebug-ctrl.48'
+[48] [Step Debug] INFO: Connecting to configured address/port: host.docker.internal:9012.
+[48] [Step Debug] WARN: Creating socket for 'host.docker.internal:9012', poll success, but error: Operation now in progress (29).
+[48] [Step Debug] WARN: Creating socket for 'host.docker.internal:9012', connect: Network is unreachable.
+[48] [Step Debug] ERR: Could not connect to debugging client. Tried: host.docker.internal:9012 (through xdebug.client_host/xdebug.client_port).
+[48] Log closed at 2024-10-24 02:54:22.936217
+
+[286] Log opened at 2024-10-24 02:58:27.781667
+[286] [Config] INFO: Control socket set up succesfully: '@xdebug-ctrl.286'
+[286] [Step Debug] INFO: Connecting to configured address/port: host.docker.internal:9012.
+[286] [Step Debug] WARN: Creating socket for 'host.docker.internal:9012', poll success, but error: Operation now in progress (29).
+[286] [Step Debug] WARN: Creating socket for 'host.docker.internal:9012', connect: Network is unreachable.
+[286] [Step Debug] ERR: Could not connect to debugging client. Tried: host.docker.internal:9012 (through xdebug.client_host/xdebug.client_port).
+[286] [Step Debug] INFO: Connecting to configured address/port: host.docker.internal:9012.
+[286] [Step Debug] WARN: Creating socket for 'host.docker.internal:9012', poll success, but error: Operation now in progress (29).
+[286] [Step Debug] WARN: Creating socket for 'host.docker.internal:9012', connect: Network is unreachable.
+[286] [Step Debug] ERR: Could not connect to debugging client. Tried: host.docker.internal:9012 (through xdebug.client_host/xdebug.client_port).
+[286] Log closed at 2024-10-24 02:58:36.298714
+
+[289] Log opened at 2024-10-24 02:58:40.912843
+[289] [Config] INFO: Control socket set up succesfully: '@xdebug-ctrl.289'
+[289] [Step Debug] INFO: Connecting to configured address/port: host.docker.internal:9012.
+[289] [Step Debug] WARN: Creating socket for 'host.docker.internal:9012', poll success, but error: Operation now in progress (29).
+[289] [Step Debug] WARN: Creating socket for 'host.docker.internal:9012', connect: Network is unreachable.
+[289] [Step Debug] ERR: Could not connect to debugging client. Tried: host.docker.internal:9012 (through xdebug.client_host/xdebug.client_port).
+[289] [Step Debug] INFO: Connecting to configured address/port: host.docker.internal:9012.
+[289] [Step Debug] WARN: Creating socket for 'host.docker.internal:9012', poll success, but error: Operation now in progress (29).
+[289] [Step Debug] WARN: Creating socket for 'host.docker.internal:9012', connect: Network is unreachable.
+[289] [Step Debug] ERR: Could not connect to debugging client. Tried: host.docker.internal:9012 (through xdebug.client_host/xdebug.client_port).
+[289] Log closed at 2024-10-24 02:58:49.276305
+
+[292] Log opened at 2024-10-24 02:58:54.851323
+[292] [Config] INFO: Control socket set up succesfully: '@xdebug-ctrl.292'
+[292] [Step Debug] INFO: Connecting to configured address/port: host.docker.internal:9012.
+[292] [Step Debug] WARN: Creating socket for 'host.docker.internal:9012', poll success, but error: Operation now in progress (29).
+[292] [Step Debug] WARN: Creating socket for 'host.docker.internal:9012', connect: Network is unreachable.
+[292] [Step Debug] ERR: Could not connect to debugging client. Tried: host.docker.internal:9012 (through xdebug.client_host/xdebug.client_port).
+[292] [Step Debug] INFO: Connecting to configured address/port: host.docker.internal:9012.
+[292] [Step Debug] WARN: Creating socket for 'host.docker.internal:9012', poll success, but error: Operation now in progress (29).
+[292] [Step Debug] WARN: Creating socket for 'host.docker.internal:9012', connect: Network is unreachable.
+[292] [Step Debug] ERR: Could not connect to debugging client. Tried: host.docker.internal:9012 (through xdebug.client_host/xdebug.client_port).
+[292] Log closed at 2024-10-24 02:59:04.256207
+
+[16] Log closed at 2024-10-24 02:59:04.349716
+
+[299] Log opened at 2024-10-24 03:02:11.845406
+[299] [Config] INFO: Control socket set up succesfully: '@xdebug-ctrl.299'
+[299] [Step Debug] INFO: Connecting to configured address/port: host.docker.internal:9012.
+[299] [Step Debug] WARN: Creating socket for 'host.docker.internal:9012', poll success, but error: Operation now in progress (29).
+[299] [Step Debug] WARN: Creating socket for 'host.docker.internal:9012', connect: Network is unreachable.
+[299] [Step Debug] ERR: Could not connect to debugging client. Tried: host.docker.internal:9012 (through xdebug.client_host/xdebug.client_port).
+[299] [Step Debug] INFO: Connecting to configured address/port: host.docker.internal:9012.
+[299] [Step Debug] WARN: Creating socket for 'host.docker.internal:9012', poll success, but error: Operation now in progress (29).
+[299] [Step Debug] WARN: Creating socket for 'host.docker.internal:9012', connect: Network is unreachable.
+[299] [Step Debug] ERR: Could not connect to debugging client. Tried: host.docker.internal:9012 (through xdebug.client_host/xdebug.client_port).
+[299] Log closed at 2024-10-24 03:02:19.110269
+
