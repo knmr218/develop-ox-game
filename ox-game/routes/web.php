@@ -30,3 +30,8 @@ Route::get('/game/reset', [
     App\Http\Controllers\GameController::class,
     'resetGame'
 ]);
+
+Route::get('/game/end', [
+    App\Http\Controllers\GameController::class,
+    'endGame'
+]);

@@ -91,4 +91,9 @@ class GameController extends Controller
         return response()->json(['status' => 'reset']); 
     }
 
+    public function endGame() {
+        Session::forget('board');
+        return view('title');
+    }
+
 }

@@ -16,8 +16,10 @@ function sendMoveToServer(row, col) {
         
         if (data.winner == 1) {
             alert("あなたの勝ちです");
+            window.location.href = "/game/end";
         } else if (data.winner == 2) {
             alert("あなたの負けです");
+            window.location.href = "/game/end";
         }
     })
     .catch(error => {
