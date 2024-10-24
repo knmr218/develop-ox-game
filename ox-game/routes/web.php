@@ -14,15 +14,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('title');
 });
 
-Route::post('sendMove', [
+Route::get('/game', function () {
+    return view('game');
+});
+
+Route::post('/game/move', [
     App\Http\Controllers\GameController::class,
     'game'
 ]);
 
-Route::get('resetGame', [
+Route::get('/game/reset', [
     App\Http\Controllers\GameController::class,
     'resetGame'
 ]);

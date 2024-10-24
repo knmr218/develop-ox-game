@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>OXゲーム</title>
-    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('css/game.css')}}">
 </head>
 <body>
     <h1 id="game_title">○×ゲーム</h1>
@@ -31,6 +31,6 @@
     </div>
 
 
-    <script src="{{asset('js/script.js')}}"></script>
+    <script src="{{asset('js/game.js')}}"></script>
 </body>
 </html>

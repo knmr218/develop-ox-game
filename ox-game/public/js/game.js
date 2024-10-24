@@ -1,6 +1,6 @@
 function sendMoveToServer(row, col) {
     // マス目の座標をサーバーに送信
-    fetch('/sendMove', {
+    fetch('/game/move', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ function updateBoard(board) {
 }
 
 function resetGame() {
-    fetch('/resetGame', {
+    fetch('/game/reset', {
         method: 'GET',
         headers: {
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
