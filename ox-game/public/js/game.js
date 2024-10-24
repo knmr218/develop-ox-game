@@ -21,6 +21,10 @@ function sendMoveToServer(row, col) {
             alert("あなたの負けです");
             window.location.href = "/game/end";
         }
+
+        if (data.Invalid) {
+            alert('無効な操作');
+        }
     })
     .catch(error => {
         console.error('Error:', error);

@@ -23,14 +23,17 @@ class GameController extends Controller
         $row = $request->input('row');
         $col = $request->input('col');
 
-        // プレイヤーの動き
-        if ($board[$row][$col] == 0) {
-            $board[$row][$col] = 1; // プレイヤーの手は「○」
+        // 入力値の検証
+        if ($board[$row][$col] != 0) {
+            return response()->json(['board' => $board, 'winner' => 0, 'Invalid' => true]);
         }
+
+        // プレイヤーの動き
+        $board[$row][$col] = 1; // プレイヤーの手は「○」
 
         // 勝利判定関数
         if ($this->checkWinner(1, $board)) {
-            return response()->json(['board' => $board, 'winner' => 1]);
+            return response()->json(['board' => $board, 'winner' => 1, 'Invalid' => false]);
         }
 
         // 敵の動き（ランダムに×を置く）
@@ -51,14 +54,14 @@ class GameController extends Controller
 
         // 敵の勝利判定
         if ($this->checkWinner(2, $board)) {
-            return response()->json(['board' => $board, 'winner' => 2]);
+            return response()->json(['board' => $board, 'winner' => 2, 'Invalid' => false]);
         }
 
         // ゲームの状態をセッションに保存
         Session::put('board', $board);
 
         // 勝者がいない場合は、更新されたボードを返す
-        return response()->json(['board' => $board, 'winner' => 0]);
+        return response()->json(['board' => $board, 'winner' => 0, 'Invalid' => false]);
     }
 
     // 勝利判定関数
