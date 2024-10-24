@@ -17,6 +17,12 @@ class GameController extends Controller
             ]);
         }
 
+        // バリデーション
+        $request->validate([
+            'row' => 'required|integer|between:0,2',
+            'col' => 'required|integer|between:0,2',
+        ]);
+
         $board = Session::get('board');
 
         // リクエストで送信された行と列を取得

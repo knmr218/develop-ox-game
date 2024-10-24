@@ -28,6 +28,8 @@ function sendMoveToServer(row, col) {
     })
     .catch(error => {
         console.error('Error:', error);
+        alert('エラーが発生しました');
+        window.location.href = '/game/end';
     });
 }
 
