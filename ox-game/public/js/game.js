@@ -85,10 +85,16 @@ tableCells.forEach(cell => {
         const row = cell.parentElement.rowIndex; // 行
         const col = cell.cellIndex % 3; // 列
 
-        clientBoard[row][col] = 1;
-        updateBoard(clientBoard);
+        if (clientBoard[row][col] === 0) {
+            clientBoard[row][col] = 1;
+            updateBoard(clientBoard);
 
-        sendMoveToServer(row,col);
+            sendMoveToServer(row,col);
+        } else {
+            alert("無効な操作");
+        }
+
+        
     });
 });
 
