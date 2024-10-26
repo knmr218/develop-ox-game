@@ -1,5 +1,6 @@
 # https://hub.docker.com/_/phpにあるイメージファイルを指定
 FROM php:8.3-fpm
+EXPOSE 5173
 
 # RUNコマンドは、buildしたときに元となるdockerイメージに対して実行する処理を記述する。
 # \（バックスラッシュ）を用いて、複数行に分けることが可能。

@@ -8,6 +8,8 @@ services:
       - ./:/var/www
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini
       - ./log:/var/log
+    ports:
+      - 5173:5173
 
   nginx-sdt:
     container_name: nginx-sdt
