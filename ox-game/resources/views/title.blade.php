@@ -6,7 +6,15 @@
 </head>
 <body>
     <h1>oxゲーム</h1>
-    <form action="{{ url('/game') }}" method="GET">
+    <form action="{{ url('/room/search') }}" method="GET">
+        @csrf
+        <label for="">対人</label>
+        <button type="submit" class="btn btn-primary">開始</button>
+    </form>
+
+    <form action="{{ url('/game/npc') }}" method="GET">
+        @csrf
+        <label for="">対NPC</label>
         <button type="submit" class="btn btn-primary">開始</button>
     </form>
 

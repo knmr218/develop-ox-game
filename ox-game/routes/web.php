@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\GameController;
+use App\Http\Controllers\PlayerController;
+use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,25 +16,41 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('title');
-});
+Route::get('/', [
+    PlayerController::class,
+    'initPlayer'
+]);
 
-Route::get('/game', function () {
+Route::get('/game/npc', function () {
     return view('game');
 });
 
+Route::get('/room/search', [
+    RoomController::class,
+    'searchRoom'
+]);
+
+Route::get('/game/init', [
+    GameController::class,
+    'initGame'
+]);
+
+Route::get('/game/start', [
+    GameController::class,
+    'startGame'
+]);
+
 Route::post('/game/move', [
-    App\Http\Controllers\GameController::class,
+    GameController::class,
     'game'
 ]);
 
 Route::get('/game/reset', [
-    App\Http\Controllers\GameController::class,
+    GameController::class,
     'resetGame'
 ]);
 
 Route::get('/game/end', [
-    App\Http\Controllers\GameController::class,
+    GameController::class,
     'endGame'
 ]);
