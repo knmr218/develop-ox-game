@@ -2,11 +2,65 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\GameStart;
+use App\Models\Game;
+use App\Models\Player;
+use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class GameController extends Controller
 {
+    public function initGame(Request $request) {
+        $playerId = $request->session()->get('player_id');
+        $room = Room::where('player_1', '=', $playerId)
+                    ->orWhere('player_2', '=', $playerId)
+                    ->first();
+        $player1 = Player::find($room->player_1);
+        $player2 = Player::find($room->player_2);
+
+        // 先攻後攻決め
+        if (is_null($player1->cur_turn)) {
+            $random = rand(0,1);
+            if ($random) {
+                $player1->update([
+                    'cur_turn' => 1
+                ]);
+
+                $player2->update([
+                    'cur_turn' => 0
+                ]);
+            } else {
+                $player1->update([
+                    'cur_turn' => 0
+                ]);
+
+                $player2->update([
+                    'cur_turn' => 1
+                ]);
+            }
+        }
+
+        // マスを初期化
+        $game = Game::find($room->game_id);
+        $game->update([
+            'board' => '000000000'
+        ]);
+
+        $player = Player::find($playerId);
+        broadcast(new GameStart($room));
+        return view('game', ['player' => $player, 'room' => $room]);
+    }
+
+    public function startGame(Request $request) {
+        $playerId = $request->session()->get('player_id');
+        $room = Room::where('player_1', '=', $playerId)
+                    ->orWhere('player_2', '=', $playerId)
+                    ->first();
+        $player = Player::find($playerId);
+        return view('game', ['player' => $player, 'room' => $room]);
+    }
+
     public function game(Request $request) {
         // セッションを使ってボードを管理
         if (!Session::has('board')) {

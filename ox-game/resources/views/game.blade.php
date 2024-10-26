@@ -1,3 +1,7 @@
+<?php
+$first = $player->cur_turn;
+$roomId = $room->id;
+?>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
@@ -32,5 +36,41 @@
 
 
     <script src="{{asset('js/game.js')}}"></script>
+    <script>
+        let first = '{{$first}}';
+        let mark;
+        if (first) {
+            mark = '○';
+            alert('あなたは先攻です');
+            enableClick();
+        } else {
+            mark = '×';
+            alert('あなたは後攻です');
+        }
+
+        let clientBoard = [
+            [0, 0, 0],
+            [0, 0, 0],
+            [0, 0, 0]
+        ];
+
+        
+
+        // GameStateUpdateイベントをリッスン
+        Echo.channel('room.{{$roomId}}')
+            .listen('GameStateUpdated', (event) => {
+                console.log('Game state updated:', event.game);
+                // ここでゲーム盤を更新する処理を実行
+                updateGameBoard(event.game);
+            });
+        
+        // GameEndイベントをリッスン
+        Echo.channel('room.{{$roomId}}')
+            .listen('GameEnd', (event) => {
+                console.log('Game ended. Winner:', event.winner);
+                // ゲーム終了時の処理を実行
+                endGame(event.winner);
+            });
+    </script>
 </body>
 </html>

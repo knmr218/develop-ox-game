@@ -79,28 +79,35 @@ function resetGame() {
     });
 }
 
-let clientBoard = [
-    [0, 0, 0],
-    [0, 0, 0],
-    [0, 0, 0]
-];
+// マスをクリックしたときの処理
+function handleClick(cell) {
+    const row = cell.parentElement.rowIndex; // 行
+    const col = cell.cellIndex % 3; // 列
+
+    if (clientBoard[row][col] === 0) {
+        clientBoard[row][col] = 1;
+        updateBoard(clientBoard);
+
+        disableClick();
+        sendMoveToServer(row,col);
+    } else {
+        alert("無効な操作");
+    }
+}
 
 const tableCells = document.querySelectorAll('.board td');
-tableCells.forEach(cell => {
-    cell.addEventListener('click', () => {
-        const row = cell.parentElement.rowIndex; // 行
-        const col = cell.cellIndex % 3; // 列
 
-        if (clientBoard[row][col] === 0) {
-            clientBoard[row][col] = 1;
-            updateBoard(clientBoard);
-
-            sendMoveToServer(row,col);
-        } else {
-            alert("無効な操作");
-        }
-
-        
+// 無効化する関数
+function disableClick() {
+    tableCells.forEach(cell => {
+        cell.removeEventListener('click', handleClick);
     });
-});
+}
+
+// 有効化する関数
+function enableClick() {
+    tableCells.forEach(cell => {
+        cell.addEventListener('click', handleClick);
+    });
+}
 
