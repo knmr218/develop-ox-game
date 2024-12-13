@@ -26,3 +26,12 @@ td {
     color: #000000;
     text-align: center;
 }
+
+.btn_box {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: 50vw;
+    margin: 0 auto;
+    display: none;
+}

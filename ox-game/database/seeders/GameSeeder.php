@@ -14,7 +14,10 @@ class GameSeeder extends Seeder
     public function run(): void
     {
         for ($i = 0; $i < 10; $i++) {
-            Game::create([]);
+            Game::create([
+                'board' => "000000000",
+                'status' => 0
+            ]);
         }
     }
 }

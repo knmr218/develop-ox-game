@@ -9,5 +9,6 @@ class Player extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id', 'cur_turn'];
+    protected $fillable = ['id', 'cur_turn', 'first'];
+    public $incrementing = false;
 }

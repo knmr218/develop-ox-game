@@ -45,14 +45,14 @@ Route::post('/game/move', [
     'game'
 ]);
 
-Route::get('/game/reset', [
-    GameController::class,
-    'resetGame'
-]);
-
 Route::get('/game/end', [
     GameController::class,
     'endGame'
+]);
+
+Route::get('/api/first', [
+    GameController::class,
+    'getFirst'
 ]);
 
 

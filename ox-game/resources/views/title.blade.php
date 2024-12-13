@@ -12,11 +12,5 @@
         <button type="submit" class="btn btn-primary">開始</button>
     </form>
 
-    <form action="{{ url('/game/npc') }}" method="GET">
-        @csrf
-        <label for="">対NPC</label>
-        <button type="submit" class="btn btn-primary">開始</button>
-    </form>
-
 </body>
 </html>

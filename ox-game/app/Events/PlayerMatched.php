@@ -10,11 +10,11 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class PlayerMatched
+class PlayerMatched implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $room; 
+    public $room;
 
     /**
      * Create a new event instance.
@@ -29,9 +29,9 @@ class PlayerMatched
      *
      * @return array<int, \Illuminate\Broadcasting\Channel>
      */
-    public function broadcastOn()
+    public function broadcastOn(): array
     {
-        return new PrivateChannel('room.' . $this->room->id);
+        return ['room.' . $this->room->id];
     }
 
     public function broadcastAs()

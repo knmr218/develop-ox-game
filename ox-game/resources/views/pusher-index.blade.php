@@ -7,10 +7,6 @@
     // Enable pusher logging - don't include this in production
     Pusher.logToConsole = true;
 
-    // var pusher = new Pusher('a8cd389f363c0e9c0b0c', {
-    //   cluster: 'ap3'
-    // });
-
     var pusher = new Pusher("{{ config('const.pusher.app_key') }}", {
         cluster: "{{ config('const.pusher.cluster') }}"
     });

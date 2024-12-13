@@ -1,6 +1,11 @@
 <?php
 $first = $player->cur_turn;
+$playerId = $player->id;
 $roomId = $room->id;
+$turn = "あなた";
+if ($first === 0) {
+    $turn = "相手";
+}
 ?>
 <html lang="ja">
 <head>
@@ -13,6 +18,7 @@ $roomId = $room->id;
 <body>
     <h1 id="game_title">○×ゲーム</h1>
     <div class="game">
+        <h2 id="game_text">{{$turn}}のターン</h2>
         <table class="board">
             <tr>
                 <td></td>
@@ -30,47 +36,55 @@ $roomId = $room->id;
                 <td></td>
             </tr>
         </table>
-
-        <button id="reset" onclick="resetGame()">リセット</button>
+    </div>
+    <div class="btn_box">
+        <button type="button" onclick="window.location.href = '/game/onemore'">もう一度</button>
+        <button type="button" onclick="window.location.href = '/game/end'">やめる</button>
     </div>
 
 
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
     <script src="{{asset('js/game.js')}}"></script>
     <script>
-        let first = '{{$first}}';
-        let mark;
-        if (first) {
-            mark = '○';
-            alert('あなたは先攻です');
+        let first = "{{$first}}";
+        let playerId = "{{$playerId}}";
+        if (first === "1") {
             enableClick();
         } else {
-            mark = '×';
-            alert('あなたは後攻です');
+            disableClick();
         }
 
-        let clientBoard = [
-            [0, 0, 0],
-            [0, 0, 0],
-            [0, 0, 0]
-        ];
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
 
-        
+        var pusher = new Pusher("{{ config('const.pusher.app_key') }}", {
+            cluster: "{{ config('const.pusher.cluster') }}"
+        });
 
-        // GameStateUpdateイベントをリッスン
-        Echo.channel('room.{{$roomId}}')
-            .listen('GameStateUpdated', (event) => {
-                console.log('Game state updated:', event.game);
-                // ここでゲーム盤を更新する処理を実行
-                updateGameBoard(event.game);
-            });
+        var channel = pusher.subscribe('room.{{$roomId}}');
         
-        // GameEndイベントをリッスン
-        Echo.channel('room.{{$roomId}}')
-            .listen('GameEnd', (event) => {
-                console.log('Game ended. Winner:', event.winner);
-                // ゲーム終了時の処理を実行
-                endGame(event.winner);
-            });
+        channel.bind('GameStateUpdate', function(data) {
+            document.getElementById("game_text").textContent = "あなたのターン";
+            clientBoard = data.board;
+            updateBoard(clientBoard);
+            enableClick();
+        });
+
+        channel.bind('GameEnd', function(data) {
+            clientBoard = data.board;
+            updateBoard(clientBoard);
+            enableClick();
+            document.querySelector('.btn_box').style.display = "block";
+            if (data.status === 1) {
+                console.log(data.winner,playerId);
+                if (data.winner != playerId) {
+                    document.getElementById("game_text").textContent = "あなたの負けです";
+                }
+            } else if (data.status === 2) {
+                document.getElementById("game_text").textContent = "引き分けです";
+            }
+        });
+
     </script>
 </body>
 </html>

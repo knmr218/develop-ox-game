@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class GameStart
+class GameStart implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -31,7 +31,7 @@ class GameStart
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('room.' . $this->room->id);
+        return ['room.' . $this->room->id];
     }
 
     public function broadcastAs()
