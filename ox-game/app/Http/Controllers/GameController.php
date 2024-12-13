@@ -6,6 +6,7 @@ use App\Events\GameEnd;
 use App\Events\GameStart;
 use App\Events\GameStateUpdate;
 use App\Models\Game;
+use App\Models\History;
 use App\Models\Player;
 use App\Models\Room;
 use Illuminate\Http\Request;
@@ -94,8 +95,10 @@ class GameController extends Controller
         $row = $request->input('row');
         $col = $request->input('col');
 
+        $coordinate = $row * 3 + $col;
+
         // 入力値の検証
-        if ($board[$row * 3 + $col] != "0") {
+        if ($board[$coordinate] != "0") {
             return response()->json(['board' => $board, 'winner' => 0, 'Invalid' => true]);
         }
 
@@ -106,11 +109,18 @@ class GameController extends Controller
         }
 
         // プレイヤーの動き
-        $board[$row * 3 + $col] = $mark; // プレイヤーの手は「○」
+        $board[$coordinate] = $mark; // プレイヤーの手は「○」
 
         // ボード情報をDBに反映
         $game->update([
             'board' => $board
+        ]);
+
+        History::create([
+            "coordinate" => $coordinate,
+            "mark" => $mark,
+            "game_id" => $game->id,
+            "player_id" => $player->id
         ]);
 
         // 勝利判定関数
