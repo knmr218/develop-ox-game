@@ -22,30 +22,29 @@ class GameController extends Controller
         $player2 = Player::find($room->player_2);
 
         // 先攻後攻決め
-        if (is_null($player1->cur_turn)) {
-            $random = rand(0,1);
-            if ($random === 1) {
-                $player1->update([
-                    'cur_turn' => 1,
-                    'first' => 1
-                ]);
+        $random = rand(0,1);
+        if ($random === 1) {
+            $player1->update([
+                'cur_turn' => 1,
+                'first' => 1
+            ]);
 
-                $player2->update([
-                    'cur_turn' => 0,
-                    'first' => 0
-                ]);
-            } else {
-                $player1->update([
-                    'cur_turn' => 0,
-                    'first' => 0
-                ]);
+            $player2->update([
+                'cur_turn' => 0,
+                'first' => 0
+            ]);
+        } else {
+            $player1->update([
+                'cur_turn' => 0,
+                'first' => 0
+            ]);
 
-                $player2->update([
-                    'cur_turn' => 1,
-                    'first' => 1
-                ]);
-            }
+            $player2->update([
+                'cur_turn' => 1,
+                'first' => 1
+            ]);
         }
+        
 
         // マスを初期化
         $game = Game::find($room->game_id);
@@ -79,6 +78,7 @@ class GameController extends Controller
         $game = Game::find($room->game_id);
         $board = $game->board;
 
+        // 操作ターンかどうか確認
         if ($player->cur_turn === 0) {
             return response()->json(['board' => $board, 'winner' => 0, 'Invalid' => true]);
         }
@@ -99,7 +99,8 @@ class GameController extends Controller
             return response()->json(['board' => $board, 'winner' => 0, 'Invalid' => true]);
         }
 
-        $mark = 1; // プレイヤーの手は「○」か「×」
+        // oxどちらなのか判別
+        $mark = 1;
         if ($player->first === 0) {
             $mark = 2;
         }
@@ -107,6 +108,7 @@ class GameController extends Controller
         // プレイヤーの動き
         $board[$row * 3 + $col] = $mark; // プレイヤーの手は「○」
 
+        // ボード情報をDBに反映
         $game->update([
             'board' => $board
         ]);
@@ -129,14 +131,18 @@ class GameController extends Controller
             return response()->json(['board' => $board, 'winner' => 2, 'Invalid' => false]);
         }
 
-        $player1->update([
-            'cur_turn' => 1,
-        ]);
-
-        $player2->update([
-            'cur_turn' => 1,
-        ]);
+        // 待機側のプレイヤーのターンに変更
+        if ($player->id === $player1->id) {
+            $player2->update([
+                'cur_turn' => 1
+            ]);
+        } else {
+            $player1->update([
+                'cur_turn' => 1
+            ]);
+        }
         
+        // 現在のプレイヤーは待機ターンへ
         $player->update([
             'cur_turn' => 0,
         ]);
@@ -147,8 +153,7 @@ class GameController extends Controller
     }
 
     // 勝利判定関数
-    private function checkWinner($player, $board)
-    {
+    private function checkWinner($player, $board) {
         // 行のチェック
         for ($i = 0; $i < 3; $i++) {
             if ($board[$i * 3 + 0] == $player && $board[$i * 3 + 1] == $player && $board[$i * 3 + 2] == $player) {
@@ -171,9 +176,42 @@ class GameController extends Controller
         return false;
     }
 
-    public function endGame() {
-        Session::forget('board');
+    public function reset($playerId) {
+        $player = Player::find($playerId);
+        $player->update([
+            'cur_turn' => null,
+            'first' => null
+        ]);
+        try {
+            $room = Room::where('player_1', '=', $playerId)
+                        ->orWhere('player_2', '=', $playerId)
+                        ->first();
+            $game = Game::find($room->game_id);
+            $game->update([
+                'board' => "000000000",
+                'status' => 0
+            ]);
+            $room->update([
+                'status' => 0,
+                'player_1' => null,
+                'player_2' => null
+            ]);
+        } catch (\Exception $e){
+            // 
+        }
+        
+    }
+    
+    public function endGame(Request $request) {
+        $playerId = $request->session()->get('player_id');
+        $this->reset($playerId);
         return redirect('/');
     }
 
+    public function onemoreGame(Request $request) {
+        $playerId = $request->session()->get('player_id');
+        $this->reset($playerId);
+        return redirect('/room/search');
+    }
+    
 }

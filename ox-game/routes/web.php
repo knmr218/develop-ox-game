@@ -50,9 +50,9 @@ Route::get('/game/end', [
     'endGame'
 ]);
 
-Route::get('/api/first', [
+Route::get('/game/onemore', [
     GameController::class,
-    'getFirst'
+    'onemoreGame'
 ]);
 
 

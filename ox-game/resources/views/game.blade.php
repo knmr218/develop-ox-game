@@ -76,7 +76,6 @@ if ($first === 0) {
             enableClick();
             document.querySelector('.btn_box').style.display = "block";
             if (data.status === 1) {
-                console.log(data.winner,playerId);
                 if (data.winner != playerId) {
                     document.getElementById("game_text").textContent = "あなたの負けです";
                 }

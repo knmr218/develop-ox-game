@@ -19,13 +19,12 @@ function sendMoveToServer(row, col) {
         clientBoard = data.board;
         updateBoard(clientBoard);
         
-        if (data.winner == 1) {
-            document.getElementById("game_text").textContent = "あなたの勝ちです";
-            disableClick();
-            document.querySelector('.btn_box').style.display = "block";
-            return;
-        } else if (data.winner == 2) {
-            document.getElementById("game_text").textContent = "引き分けです";
+        if (data.winner !== 0) {
+            if (data.winner === 1) {
+                document.getElementById("game_text").textContent = "あなたの勝ちです";
+            } else if (data.winner === 2) {
+                document.getElementById("game_text").textContent = "引き分けです";
+            }
             disableClick();
             document.querySelector('.btn_box').style.display = "block";
             return;
