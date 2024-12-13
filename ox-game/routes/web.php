@@ -54,3 +54,17 @@ Route::get('/game/end', [
     GameController::class,
     'endGame'
 ]);
+
+
+Route::group(['prefix' => '/pusher'], function () {
+    Route::get('/index', function () {
+        return view('pusher-index');
+    });
+
+    // 追加
+    Route::get('/hello-world', function () {
+        event(new App\Events\MyEvent('hello world'));
+        return ['message' => 'send to message : hello world'];
+    });
+});
+
